@@ -23,13 +23,12 @@ public class LoginController {
     public UserService userService;
 
     /**
-     * 登录
+     * 登录接口
      * @param map
-     * @return
+     * @return  登录用户的数据与状态码
      */
     @PostMapping("/register")
     public ResponseEntity<Map<String,Object>> register(@RequestBody() HashMap<String,String> map){
-
         String userName = map.get("userName");
         String passWord = map.get("passWord");
         User user = new User(null,userName,passWord);
