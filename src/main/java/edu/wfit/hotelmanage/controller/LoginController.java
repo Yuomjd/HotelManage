@@ -35,8 +35,6 @@ public class LoginController {
         QueryWrapper<User> wrapper = new QueryWrapper<>(user);
         wrapper.select("username","password");
         User one = userService.getOne(wrapper);
-        User one2 = userService.getOne(wrapper);
-        User on = userService.getOne(wrapper);
 
         ResponseEntity<Map<String,Object>> responseEntity;
         if(one != null){
