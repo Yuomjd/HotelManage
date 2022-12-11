@@ -3,6 +3,7 @@ package edu.wfit.hotelmanage.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import edu.wfit.hotelmanage.bean.User;
 import edu.wfit.hotelmanage.service.UserService;
+import edu.wfit.hotelmanage.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import sun.misc.BASE64Encoder;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,17 +35,13 @@ public class LoginController {
     public ResponseEntity<Map<String,Object>> register(@RequestBody() HashMap<String,String> map){
         String userName = map.get("userName");
         String passWord = map.get("passWord");
-        User user = new User(null,userName,passWord);
-        QueryWrapper<User> wrapper = new QueryWrapper<>(user);
-        wrapper.select("username","password");
-        User one = userService.getOne(wrapper);
-
+        User user = userService.getUser(userName, passWord);
         ResponseEntity<Map<String,Object>> responseEntity;
-        if(one != null){
-            responseEntity= new ResponseEntity(one, HttpStatus.OK);
+        if(userService.exists(user)){
+            responseEntity= new ResponseEntity(user, HttpStatus.OK);
         }
         else {
-            responseEntity= new ResponseEntity(one, HttpStatus.BAD_REQUEST);
+            responseEntity= new ResponseEntity(user, HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
@@ -53,25 +53,22 @@ public class LoginController {
 
 
     /**
-     * 注册
+     * 注册接口
      * @param map
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<Map<String,Object>> login(@RequestBody() HashMap<String,String> map){
+    public ResponseEntity<User> login(@RequestBody() HashMap<String,String> map) throws NoSuchAlgorithmException {
         String userName = map.get("userName");
         String passWord = map.get("passWord");
-        User user = new User(null,userName,passWord);
-        QueryWrapper<User> wrapper = new QueryWrapper<>(user);
-        wrapper.select("username");
-        User one = userService.getOne(wrapper);
-        ResponseEntity response;
-        if(one == null){
+        ResponseEntity<User> response;
+        if(!userService.exists(new User(null,userName,null))){
+            User user = new User(null,userName,passWord);
             userService.save(user);
-            response = new ResponseEntity(HttpStatus.OK);
+            response = new ResponseEntity<>(user,HttpStatus.OK);
         }
         else{
-            response = new ResponseEntity(HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return response;
     }

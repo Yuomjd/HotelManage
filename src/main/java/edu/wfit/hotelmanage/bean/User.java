@@ -15,12 +15,13 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer userId;
 
-    @TableField("username")
+    @TableField("user_name")
     private String userName;
 
-    @TableField("password")
-    private String password;
+    @TableField("user_password")
+    private String userPassword;
+
 
 }
