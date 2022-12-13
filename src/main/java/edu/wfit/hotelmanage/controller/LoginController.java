@@ -32,16 +32,16 @@ public class LoginController {
      * @return  登录用户的数据与状态码
      */
     @PostMapping("/register")
-    public ResponseEntity<Map<String,Object>> register(@RequestBody() HashMap<String,String> map){
+    public ResponseEntity<User> register(@RequestBody() HashMap<String,String> map){
         String userName = map.get("userName");
         String passWord = map.get("passWord");
         User user = userService.getUser(userName, passWord);
-        ResponseEntity<Map<String,Object>> responseEntity;
+        ResponseEntity<User> responseEntity;
         if(userService.exists(user)){
-            responseEntity= new ResponseEntity(user, HttpStatus.OK);
+            responseEntity= new ResponseEntity<>(user, HttpStatus.OK);
         }
         else {
-            responseEntity= new ResponseEntity(user, HttpStatus.BAD_REQUEST);
+            responseEntity= new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
@@ -58,7 +58,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody() HashMap<String,String> map) throws NoSuchAlgorithmException {
+    public ResponseEntity<User> login(@RequestBody() HashMap<String,String> map){
         String userName = map.get("userName");
         String passWord = map.get("passWord");
         ResponseEntity<User> response;

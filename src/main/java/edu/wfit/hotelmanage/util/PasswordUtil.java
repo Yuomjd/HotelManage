@@ -1,6 +1,5 @@
 package edu.wfit.hotelmanage.util;
 
-import org.springframework.stereotype.Component;
 import sun.misc.BASE64Encoder;
 
 import java.security.MessageDigest;
@@ -9,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtil {
 
-    public static String getPasswordBySha256(String password){
+    public static String getPasswordByMD5(String password){
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("MD5");

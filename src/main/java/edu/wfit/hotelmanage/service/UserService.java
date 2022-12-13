@@ -17,7 +17,7 @@ public class UserService extends ServiceImpl<UserMapper,User> implements IServic
     UserMapper userMapper;
 
     public User getUser(String username,String passWord){
-        passWord = PasswordUtil.getPasswordBySha256(passWord);
+        passWord = PasswordUtil.getPasswordByMD5(passWord);
         User user = new User(null,username,passWord);
         QueryWrapper<User> wrapper = new QueryWrapper<>(user);
         wrapper.select("user_id","user_name","user_password");
@@ -38,7 +38,7 @@ public class UserService extends ServiceImpl<UserMapper,User> implements IServic
     }
     @Override
     public boolean save(User entity) {
-        entity.setUserPassword(PasswordUtil.getPasswordBySha256(entity.getUserPassword()));
+        entity.setUserPassword(PasswordUtil.getPasswordByMD5(entity.getUserPassword()));
         return super.save(entity);
     }
 }
