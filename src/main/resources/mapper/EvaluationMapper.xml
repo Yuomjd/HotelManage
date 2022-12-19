@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.wfit.hotelmanage.mapper.EvaluationMapper">
+
+    <resultMap id="BaseResultMap" type="edu.wfit.hotelmanage.pojo.Evaluation">
+            <id property="eId" column="e_id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="score" column="score" jdbcType="INTEGER"/>
+            <result property="eContent" column="e_content" jdbcType="VARCHAR"/>
+            <result property="eDate" column="e_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        e_id,user_id,score,
+        e_content,e_date
+    </sql>
+</mapper>

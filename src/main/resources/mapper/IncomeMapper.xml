@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.wfit.hotelmanage.mapper.IncomeMapper">
+
+    <resultMap id="BaseResultMap" type="edu.wfit.hotelmanage.pojo.Income">
+            <id property="cashierId" column="cashier_id" jdbcType="INTEGER"/>
+            <result property="cashierItem" column="cashier_item" jdbcType="VARCHAR"/>
+            <result property="cashierPrice" column="cashier_price" jdbcType="DECIMAL"/>
+            <result property="cashierDate" column="cashier_date" jdbcType="TIMESTAMP"/>
+            <result property="cashierType" column="cashier_type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        cashier_id,cashier_item,cashier_price,
+        cashier_date,cashier_type
+    </sql>
+</mapper>

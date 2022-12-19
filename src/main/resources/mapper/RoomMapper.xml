@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.wfit.hotelmanage.mapper.RoomMapper">
+
+    <resultMap id="BaseResultMap" type="edu.wfit.hotelmanage.pojo.Room">
+            <id property="roomId" column="room_id" jdbcType="INTEGER"/>
+            <result property="roomType" column="room_type" jdbcType="VARCHAR"/>
+            <result property="roomNumber" column=" room_number" jdbcType="INTEGER"/>
+            <result property="beds" column="beds" jdbcType="INTEGER"/>
+            <result property="roomPrice" column="room_price" jdbcType="INTEGER"/>
+            <result property="roomStatus" column="room_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        room_id,room_type, room_number,
+        beds,room_price,room_status
+    </sql>
+</mapper>

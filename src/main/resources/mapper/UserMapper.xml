@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.wfit.hotelmanage.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="edu.wfit.hotelmanage.pojo.User">
+            <id property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
+            <result property="trueName" column="true_name" jdbcType="VARCHAR"/>
+            <result property="gender" column="gender" jdbcType="CHAR"/>
+            <result property="contact" column="contact" jdbcType="VARCHAR"/>
+            <result property="userType" column="user_type" jdbcType="INTEGER"/>
+            <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,user_name,user_password,
+        true_name,gender,contact,
+        user_type,id_card
+    </sql>
+    <insert id="insertSelective">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="userPassword != null">user_password,</if>
+            <if test="trueName != null">true_name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="contact != null">contact,</if>
+            <if test="userType != null">user_type,</if>
+            <if test="idCard != null">id_card,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
+            <if test="userName != null">#{userName,jdbcType=VARCHAR},</if>
+            <if test="userPassword != null">#{userPassword,jdbcType=VARCHAR},</if>
+            <if test="trueName != null">#{trueName,jdbcType=VARCHAR},</if>
+            <if test="gender != null">#{gender,jdbcType=CHAR},</if>
+            <if test="contact != null">#{contact,jdbcType=VARCHAR},</if>
+            <if test="userType != null">#{userType,jdbcType=INTEGER},</if>
+            <if test="idCard != null">#{idCard,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+    </select>
+    <delete id="deleteByUserId">
+        delete
+        from t_user
+        where user_id = #{userId,jdbcType=NUMERIC}
+    </delete>
+
+</mapper>

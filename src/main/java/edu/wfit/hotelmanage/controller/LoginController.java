@@ -1,9 +1,9 @@
 package edu.wfit.hotelmanage.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import edu.wfit.hotelmanage.bean.User;
+
+import edu.wfit.hotelmanage.pojo.User;
 import edu.wfit.hotelmanage.service.UserService;
-import edu.wfit.hotelmanage.util.PasswordUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import sun.misc.BASE64Encoder;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.Map;
 
+@Slf4j
 @Controller
 @RestController
 public class LoginController {
@@ -33,15 +30,16 @@ public class LoginController {
      */
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody() HashMap<String,String> map){
+        log.info("登录请求进来了...");
         String userName = map.get("userName");
         String passWord = map.get("passWord");
         User user = userService.getUser(userName, passWord);
         ResponseEntity<User> responseEntity;
-        if(userService.exists(user)){
+        if(user != null){
             responseEntity= new ResponseEntity<>(user, HttpStatus.OK);
         }
         else {
-            responseEntity= new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+            responseEntity= new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return responseEntity;
     }
@@ -59,11 +57,24 @@ public class LoginController {
      */
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody() HashMap<String,String> map){
+        log.info("注册请求进来了...");
         String userName = map.get("userName");
         String passWord = map.get("passWord");
         ResponseEntity<User> response;
-        if(!userService.exists(new User(null,userName,null))){
-            User user = new User(null,userName,passWord);
+        if(!userService.existsUser(userName)){
+            String email = map.get("email");
+            String idCard = map.get("idCard");
+            String gender = map.get("gender");
+            String trueName = map.get("trueName");
+            User user = new User();
+            user.setUserName(userName);
+            user.setUserPassword(passWord);
+            user.setGender(gender);
+            user.setContact(email);
+            user.setIdCard(idCard);
+            user.setTrueName(trueName);
+//            0为普通用户 1为管理员，默认都为普通用户
+            user.setUserType(0);
             userService.save(user);
             response = new ResponseEntity<>(user,HttpStatus.OK);
         }
