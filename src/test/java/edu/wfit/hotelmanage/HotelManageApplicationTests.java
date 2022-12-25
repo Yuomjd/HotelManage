@@ -1,7 +1,7 @@
 package edu.wfit.hotelmanage;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import edu.wfit.hotelmanage.bean.User;
+import edu.wfit.hotelmanage.pojo.User;
 import edu.wfit.hotelmanage.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

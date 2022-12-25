@@ -65,9 +65,10 @@ This is HotelMangeSystem (Java Practicum)
 - 用户评价功能，允许用户对酒店进行评价，并允许酒店管理人员查看和回复评价。
 ### Api:
 
-| 接口url     | 接口用途 | 接口方法 |
-|-----------|------|------|
-| /login    | 注册接口 | post |
-| /register | 登录接口 | post |
+| 接口url     | 接口用途       | 接口方法 |
+|-----------|------------|------|
+| /login    | 注册接口       | post |
+| /register | 登录接口       | post |
+| /user     | 获取所有用户数据接口 | get  |
 
 

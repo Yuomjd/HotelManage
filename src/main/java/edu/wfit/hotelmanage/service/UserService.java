@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import edu.wfit.hotelmanage.pojo.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface UserService extends IService<User> {
 
@@ -12,4 +14,6 @@ public interface UserService extends IService<User> {
     boolean existsUser(String userName);
 
     boolean save(User user);
+
+    List<User> getAll();
 }

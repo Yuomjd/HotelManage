@@ -9,6 +9,8 @@ import edu.wfit.hotelmanage.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
 * @author yuo
 * @description 针对表【t_user】的数据库操作Service实现
@@ -53,6 +55,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     public boolean save(User entity) {
         entity.setUserPassword(PasswordUtil.getPasswordByMD5(entity.getUserPassword()));
         return super.save(entity);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userMapper.findAll();
     }
 }
 
