@@ -10,9 +10,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan("edu.wfit.hotelmanage.mapper")
 public class MyBatisPlusConfig {
+
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(){
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+//        添加分页插件
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }

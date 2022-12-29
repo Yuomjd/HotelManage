@@ -1,4 +1,6 @@
 package edu.wfit.hotelmanage.mapper;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 import edu.wfit.hotelmanage.pojo.Room;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface RoomMapper extends BaseMapper<Room> {
 
+    List<Room> getByRoomId(@Param("roomId") Integer roomId);
 }
 
 

@@ -14,7 +14,14 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        room_id,room_type, room_number,
+        room_id,room_type,room_number,
         beds,room_price,room_status
     </sql>
+    <select id="getByRoomId" resultMap="BaseResultMap">
+        select
+        *
+        from t_room
+        where
+        room_id = #{roomId,jdbcType=NUMERIC}
+    </select>
 </mapper>

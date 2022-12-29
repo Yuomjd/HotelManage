@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.wfit.hotelmanage.pojo.Room;
 import edu.wfit.hotelmanage.service.RoomService;
 import edu.wfit.hotelmanage.mapper.RoomMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,12 @@ import org.springframework.stereotype.Service;
 public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room>
     implements RoomService{
 
+    @Autowired
+    RoomMapper roomMapper;
+
+    public Room getRoomById(Integer id){
+        return roomMapper.getByRoomId(id).get(0);
+    }
 }
 
 

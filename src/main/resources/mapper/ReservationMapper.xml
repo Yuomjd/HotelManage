@@ -19,4 +19,11 @@
         book_date,check__in_date,check_out_date,
         book_status
     </sql>
+    <select id="getByRoomId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_reservation
+        where
+        room_id = #{roomId,jdbcType=NUMERIC}
+    </select>
 </mapper>
