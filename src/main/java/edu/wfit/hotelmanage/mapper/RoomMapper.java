@@ -14,6 +14,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface RoomMapper extends BaseMapper<Room> {
 
     List<Room> getByRoomId(@Param("roomId") Integer roomId);
+
+    List<Room> getByRoomNumber(@Param("roomNumber") Integer roomNumber);
+
+    List<Room> getAll();
+
+
 }
 
 

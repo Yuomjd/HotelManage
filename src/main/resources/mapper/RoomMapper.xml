@@ -24,4 +24,16 @@
         where
         room_id = #{roomId,jdbcType=NUMERIC}
     </select>
+    <select id="getByRoomNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_room
+        where
+        room_number = #{roomNumber,jdbcType=NUMERIC}
+    </select>
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_room
+    </select>
 </mapper>
