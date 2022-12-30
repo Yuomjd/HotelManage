@@ -16,4 +16,14 @@
         e_id,user_id,score,
         e_content,e_date
     </sql>
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_evaluation
+    </select>
+    <delete id="deleteByEId">
+        delete
+        from t_evaluation
+        where e_id = #{eId,jdbcType=NUMERIC}
+    </delete>
 </mapper>

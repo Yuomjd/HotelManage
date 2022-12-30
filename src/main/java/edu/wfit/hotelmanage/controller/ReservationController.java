@@ -77,7 +77,7 @@ public class ReservationController {
     @PutMapping("/reservation/{id}")
     public ResponseEntity updateCheckOutDateByBookId(@RequestBody()Map<String,String> map, @PathVariable String id){
         String checkOut = map.get("checkOutDate");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Date checkOutDate;
         try {
             checkOutDate = dateFormat.parse(checkOut);

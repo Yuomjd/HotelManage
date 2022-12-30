@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.wfit.hotelmanage.mapper.ReplyMapper">
+
+    <resultMap id="BaseResultMap" type="edu.wfit.hotelmanage.pojo.Reply">
+            <id property="replyId" column="reply_id" jdbcType="INTEGER"/>
+            <result property="eId" column="e_id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="replyContent" column="reply_content" jdbcType="VARCHAR"/>
+            <result property="replyDate" column="reply_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        reply_id,e_id,user_id,
+        reply_content,reply_date
+    </sql>
+    <select id="getAllByEId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_reply
+        where
+        e_id = #{eId,jdbcType=NUMERIC}
+    </select>
+    <delete id="deleteByEId">
+        delete
+        from t_reply
+        where e_id = #{eId,jdbcType=NUMERIC}
+    </delete>
+</mapper>
