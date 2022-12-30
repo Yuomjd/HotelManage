@@ -61,14 +61,36 @@ This is HotelMangeSystem (Java Practicum)
 - 登录和注册功能，允许用户创建账号并登录到系统。
 - 预订功能，允许用户查询并预订酒店房间。
 - 房间管理功能，允许酒店管理人员添加、修改和删除酒店房间信息。
-- 收银管理功能，允许酒店管理人员管理收入和支出，并生成报表。
+- 收银管理功能，允许酒店管理人员管理收入和支出，并生成报表。(暂未实现)
 - 用户评价功能，允许用户对酒店进行评价，并允许酒店管理人员查看和回复评价。
 ### Api:
 
-| 接口url     | 接口用途       | 接口方法 |
-|-----------|------------|------|
-| /login    | 注册接口       | post |
-| /register | 登录接口       | post |
-| /user     | 获取所有用户数据接口 | get  |
+| 接口url                     | 接口用途             | 接口方法   |
+|:--------------------------|------------------|--------|
+| /login                    | 注册接口             | post   |
+| /register                 | 登录接口             | post   |
+| /user                     | 获取所有用户数据接口       | get    |
+| /room                     | 获取所有房间           | get    |
+| /room/{roomNumber}        | 获取对应房号的房间        | get    |
+| /room/status/{roomStatus} | 获取对应状态的房间        | get    |
+| /room                     | 增加房间             | post   |
+| /room                     | 修改房间(room_id)    | put    |
+| /room                     | 删除房间(room_id)    | delete |
+| /reservation              | 获取所有预订           | get    |
+| /reservation              | 增加预订             | post   |
+| /reservation              | 根据当前时间自动更新所有预订信息 | put    |
+| /reservation/done         | 获取所有已经完成的预订信息    | get    |
+| /reservation/{id}         | 根据id修改预订的退房日期    | put    |
+| /reservation/{id}         | 根据id删除对应的预订      | delete |
+| /evaluation               | 获取所有评价           | get    |
+| /evaluation               | 添加评价             | post   |
+| /evaluation               | 修改评价             | put    |
+| /evaluation/{eId}         | 删除评价             | delete |
+| /reply                    | 获取所有回复           | get    |
+| /reply/{replyId}          | 获取对应回复Id的回复      | get    |
+| /reply/e/{eId}            | 获取对于评价Id的回复      | get    |
+| /reply                    | 添加回复             | post   |
+| /reply                    | 修改回复内容           | put    |
+| /reply/{replyId}          | 删除回复             | delete |
 
 
