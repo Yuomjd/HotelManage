@@ -70,6 +70,15 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room>
         roomMapper.deleteById(roomId);
     }
 
+    @Override
+    public void updateRoomStatusByRoomId(String roomStatus,Integer roomId) {
+        roomMapper.updateRoomStatusByRoomId(roomStatus,roomId);
+    }
+
+    @Override
+    public void updateRoomStatusByRoomId(String status, List<Integer> roomIds) {
+        roomMapper.updateRoomStatusByRoomIdIn(status,roomIds);
+    }
 
 }
 

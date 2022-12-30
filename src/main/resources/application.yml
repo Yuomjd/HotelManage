@@ -33,7 +33,8 @@ spring:
           enabled: true
           config:
             drop-table-allow: false
-
+  thymeleaf:
+    check-template-location: false
 # mybatis: mybatis相关设置 使用MybatisPlus 无需配置
   #  config-location: classpath:mybatis/mybatis-config.xml
 #  mapper-locations: classpath:mybatis/mapper/*.xml

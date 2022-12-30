@@ -16,28 +16,28 @@ public class RoomController {
 
     @Autowired
     RoomService roomService;
-    @GetMapping("/home/{roomNumber}")
+    @GetMapping("/room/{roomNumber}")
     public ResponseEntity<List<Room>> getRoom(@PathVariable("roomNumber")String roomNumber){
         log.info("home/roomNumber进来了...");
         List<Room> rooms = roomService.getRoomLikeRoomNumber(Integer.valueOf(roomNumber));
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
-    @GetMapping("/home")
+    @GetMapping("/room")
     public ResponseEntity<List<Room>> getAllRoom(){
         log.info("/home进来了...");
         List<Room> all = roomService.getAll();
         return new ResponseEntity<>(all,HttpStatus.OK);
     }
 
-    @GetMapping("/home/status/{roomStatus}")
+    @GetMapping("/room/status/{roomStatus}")
     public ResponseEntity<List<Room>> getRoomByRoomStatus(@PathVariable("roomStatus") String roomStatus){
         log.info("/home/status/roomStatus进来了...");
         List<Room> rooms = roomService.getAllByRoomStatus(roomStatus);
         return new ResponseEntity<>(rooms,HttpStatus.OK);
     }
 
-    @PostMapping("/home")
+    @PostMapping("/room")
     public ResponseEntity insertRoom(@RequestBody() Room room){
         log.info("/home 添加请求进来了...");
         Room roomByRoomNumber = roomService.getRoomByRoomNumber(room.getRoomNumber());
@@ -54,7 +54,7 @@ public class RoomController {
         return response;
     }
 
-    @PutMapping("/home")
+    @PutMapping("/room")
     public ResponseEntity updateRoom(@RequestBody() Room room){
         log.info("/home 修改请求进来了...");
         ResponseEntity response;
@@ -71,10 +71,11 @@ public class RoomController {
         return response;
     }
 
-    @DeleteMapping("/home")
+    @DeleteMapping("/room")
     public ResponseEntity deleteRoom(@RequestBody() Room room){
         log.info("/home 删除请求进来了..");
         roomService.deleteRoomByRoomId(room.getRoomId());
         return new ResponseEntity(HttpStatus.OK);
     }
+
 }

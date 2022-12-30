@@ -1,4 +1,5 @@
 package edu.wfit.hotelmanage.mapper;
+import java.util.Collection;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +20,9 @@ public interface RoomMapper extends BaseMapper<Room> {
 
     List<Room> getAll();
 
+    int updateRoomStatusByRoomId(@Param("roomStatus") String roomStatus, @Param("roomId") Integer roomId);
 
+    int updateRoomStatusByRoomIdIn(@Param("roomStatus") String roomStatus, @Param("roomIdList") Collection<Integer> roomIdList);
 }
 
 

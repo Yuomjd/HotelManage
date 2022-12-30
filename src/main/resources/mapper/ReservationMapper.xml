@@ -16,7 +16,7 @@
 
     <sql id="Base_Column_List">
         book_id,user_id,room_id,
-        book_date,check__in_date,check_out_date,
+        book_date,check_in_date,check_out_date,
         book_status
     </sql>
     <select id="getByRoomId" resultMap="BaseResultMap">
@@ -26,4 +26,30 @@
         where
         room_id = #{roomId,jdbcType=NUMERIC}
     </select>
+    <select id="getAllByCheckOutDateBetweenAndBookStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_reservation
+        where
+        check_out_date between #{beginCheckOutDate} and #{endCheckOutDate}
+        AND book_status = #{bookStatus,jdbcType=VARCHAR}
+    </select>
+    <update id="updateBookStatusByCheckOutDateBetweenAndBookStatus">
+        update t_reservation
+        set book_status = #{bookStatus,jdbcType=VARCHAR}
+        where check_out_date between #{beginCheckOutDate,jdbcType=TIMESTAMP} and #{endCheckOutDate,jdbcType=TIMESTAMP}
+          AND book_status = #{oldBookStatus,jdbcType=VARCHAR}
+    </update>
+    <select id="getByBookStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_reservation
+        where
+        book_status = #{bookStatus,jdbcType=VARCHAR}
+    </select>
+    <update id="updateCheckOutDateByBookId">
+        update t_reservation
+        set check_out_date = #{checkOutDate,jdbcType=TIMESTAMP}
+        where book_id = #{bookId,jdbcType=NUMERIC}
+    </update>
 </mapper>

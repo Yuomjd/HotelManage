@@ -27,4 +27,8 @@ public interface RoomService extends IService<Room> {
    void updateRoom(Room room);
 
    void deleteRoomByRoomId(Integer roomId);
+
+   void updateRoomStatusByRoomId(String status,Integer roomId);
+
+   void updateRoomStatusByRoomId(String status,List<Integer> roomIds);
 }

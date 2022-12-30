@@ -36,4 +36,18 @@
         <include refid="Base_Column_List"/>
         from t_room
     </select>
+    <update id="updateRoomStatusByRoomId">
+        update t_room
+        set room_status = #{roomStatus,jdbcType=VARCHAR}
+        where room_id = #{roomId,jdbcType=NUMERIC}
+    </update>
+    <update id="updateRoomStatusByRoomIdIn">
+        update t_room
+        set room_status = #{roomStatus,jdbcType=VARCHAR}
+        where
+        room_id in
+        <foreach collection="roomIdList" item="item" open="(" close=")" separator=",">
+            #{item,jdbcType=NUMERIC}
+        </foreach>
+    </update>
 </mapper>
