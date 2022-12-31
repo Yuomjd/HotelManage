@@ -22,7 +22,7 @@ public interface RoomMapper extends BaseMapper<Room> {
 
     int updateRoomStatusByRoomId(@Param("roomStatus") String roomStatus, @Param("roomId") Integer roomId);
 
-    int updateRoomStatusByRoomIdIn(@Param("roomStatus") String roomStatus, @Param("roomIdList") Collection<Integer> roomIdList);
+    int updateRoomStatusByRoomNumberIn(@Param("roomStatus") String roomStatus, @Param("roomIdList") Collection<Integer> roomIdList);
 }
 
 

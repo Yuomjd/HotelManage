@@ -28,7 +28,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room>
     }
 
     @Override
-    public Room getRoomByRoomNumber(Integer roomNumber) {
+    public Room getRoomByRoomNumber(String roomNumber) {
         QueryWrapper<Room> wrapper = new QueryWrapper<>();
         wrapper.eq("room_number",roomNumber);
         return roomMapper.selectOne(wrapper);
@@ -43,7 +43,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room>
 
     @Override
     public List<Room> getAll() {
-        return roomMapper.getAll();
+        return roomMapper.selectList(null);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room>
 
     @Override
     public void updateRoomStatusByRoomId(String status, List<Integer> roomIds) {
-        roomMapper.updateRoomStatusByRoomIdIn(status,roomIds);
+        roomMapper.updateRoomStatusByRoomNumberIn(status,roomIds);
     }
 
 }

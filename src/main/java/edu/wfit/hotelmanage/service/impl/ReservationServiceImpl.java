@@ -70,6 +70,11 @@ public class ReservationServiceImpl extends ServiceImpl<ReservationMapper, Reser
     public void deleteByBookId(Integer id) {
         reservationMapper.deleteById(id);
     }
+
+    @Override
+    public List<Reservation> getReservationByStatus(String bookStatus) {
+        return reservationMapper.getByBookStatus(bookStatus);
+    }
 }
 
 

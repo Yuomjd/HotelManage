@@ -4,10 +4,10 @@ import edu.wfit.hotelmanage.pojo.Reservation;
 import edu.wfit.hotelmanage.pojo.Room;
 import edu.wfit.hotelmanage.service.ReservationService;
 import edu.wfit.hotelmanage.service.RoomService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 public class ReservationController {
 
@@ -33,8 +34,15 @@ public class ReservationController {
 
     @PostMapping("/reservation")
     public ResponseEntity addReservation(@RequestBody Reservation reservation){
+        Room roomByRoomNumber = roomService.getRoomByRoomNumber(String.valueOf(reservation.getRoomId()));
+        if ( roomByRoomNumber == null || !roomByRoomNumber.getRoomStatus().equals("空闲")) {
+            log.info("房间不存在或者不是空闲状态");
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        Date now = new Date();
+        reservation.setBookDate(now);
         reservationService.insertReservation(reservation);
-        roomService.updateRoomStatusByRoomId("已预订",reservation.getRoomId());
+        roomService.updateRoomStatusByRoomId("已预订", roomByRoomNumber.getRoomId());
         ResponseEntity response = new ResponseEntity(HttpStatus.OK);
         return response;
     }
@@ -92,5 +100,11 @@ public class ReservationController {
     public ResponseEntity deleteByBookId(@PathVariable String id){
         reservationService.deleteByBookId(Integer.valueOf(id));
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/reservation/{status}")
+    public ResponseEntity<List<Reservation>> getReservationByStatus(@PathVariable String status){
+        List<Reservation> reservationByStatus = reservationService.getReservationByStatus(status);
+        return new ResponseEntity<>(reservationByStatus,HttpStatus.OK);
     }
 }

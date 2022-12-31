@@ -28,7 +28,8 @@ public class Room implements Serializable {
     /**
      * 
      */
-    private Integer roomNumber;
+    @TableField(value = "room_number")
+    private String roomNumber;
 
     /**
      * 

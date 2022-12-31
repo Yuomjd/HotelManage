@@ -78,4 +78,10 @@ public class RoomController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PutMapping("/room/{roomId}")
+    public ResponseEntity updateRoomById(@PathVariable String roomId,@RequestBody Room room){
+        room.setRoomId(Integer.valueOf(roomId));
+        roomService.updateById(room);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

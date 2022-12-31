@@ -28,4 +28,6 @@ public interface ReservationService extends IService<Reservation> {
     void updateCheckOutDateById(Date checkOutDate,Integer bookId);
 
     void deleteByBookId(Integer id);
+
+    List<Reservation> getReservationByStatus(String status);
 }

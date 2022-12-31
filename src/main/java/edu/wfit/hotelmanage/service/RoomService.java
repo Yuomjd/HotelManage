@@ -14,7 +14,7 @@ public interface RoomService extends IService<Room> {
 
    Room getRoomById(Integer id);
 
-   Room getRoomByRoomNumber(Integer roomNumber);
+   Room getRoomByRoomNumber(String roomNumber);
 
    List<Room> getRoomLikeRoomNumber(Integer roomNumber);
 

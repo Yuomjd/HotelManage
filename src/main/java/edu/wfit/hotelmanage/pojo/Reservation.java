@@ -27,7 +27,7 @@ public class Reservation implements Serializable {
     private Integer userId;
 
     /**
-     * 
+     * 这个roomId对应的是Room表中的roomNumber
      */
     private Integer roomId;
 
