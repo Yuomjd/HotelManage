@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,8 @@ public class ReplyController {
 
     @PostMapping("/reply")
     public ResponseEntity addReply(@RequestBody Reply reply){
+        Date date = new Date();
+        reply.setReplyDate(date);
         replyService.save(reply);
         return new ResponseEntity(HttpStatus.OK);
     }
